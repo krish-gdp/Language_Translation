@@ -25,18 +25,19 @@ class DataIngestion:
         self.config= config
 
     def download_file(self):
+        
         if not os.path.exists(self.config.local_data_file):
-            df =pd.read_csv(self.config.source_URL,delimiter="\t")
+
+            df =pd.read_csv(self.config.source_URL,delimiter="\t",header=None)
             df = df[[0,1]]
             df.columns = ['English','French']
-            df.to_excel(self.config.local_data_file)
+            df.to_csv(self.config.local_data_file)
             headers = df.columns
-
-
-            logger.info(f"file  download! with info: \n{headers}")
-
+            logger.info("file  download!")
+            
         else:
-            logger.info(f"File already exists of size: {get_size(Path(self.config.local_data_file))}")
+
+            logger.info("******File already exists******* ")
 
 
 
